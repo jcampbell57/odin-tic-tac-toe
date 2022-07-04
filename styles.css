@@ -35,12 +35,13 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 15px;
+    gap: 15px;
 }
 
 .gameContainer {
     height: 500px;
     width: 500px;
-    margin: 30px;
     border: 2px solid lightgreen;
     border-radius: 8px;
     display: grid;
@@ -53,11 +54,16 @@ h1 {
     color: lightgreen;
     padding: 10px;
     font-size: 6rem;
-    /* font-size: 6rem */
 }
 
 .cell:hover {
     background-color: hsl(120, 73%, 75%, 0.1);
+}
+
+.message {
+    height: 35px;
+    color: red;
+    font-size: 1.5rem;
 }
 
 .reset {

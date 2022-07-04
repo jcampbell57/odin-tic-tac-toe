@@ -2,6 +2,8 @@
 const gameboard = (function () {
     const gameContainer = document.querySelector('.gameContainer');
     const reset = document.querySelector('.reset');
+    const message = document.querySelector('.message');
+
     // const marks = ['X', '', '', '', 'X', '', 'X', '', 'X']
 
     // player objects
@@ -51,10 +53,12 @@ const gameboard = (function () {
     // user input listener
     gameContainer.addEventListener('click', (e) => {
         if (game.marks[e.target.id] !== '') {
+            message.textContent = 'Pick again'
             console.log('error')
             console.log(e.target.id)
 
         } else {
+            message.textContent = ''
             game.marks[e.target.id] = 'O';
             game.render();
         }
