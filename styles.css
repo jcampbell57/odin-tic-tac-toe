@@ -40,6 +40,7 @@ h1 {
 .gameContainer {
     height: 500px;
     width: 500px;
+    box-sizing: border-box;
     border: 2px solid lightgreen;
     border-radius: 8px;
     display: grid;
@@ -49,11 +50,17 @@ h1 {
 }
 
 .winFrame {
-    height: 500px;
     width: 500px;
+    height: 500px;
     position: absolute;
+    box-sizing: border-box;
     border: 4px solid lightgreen;
     background-color: rgba(0, 0, 0, 0.3);
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: -2px;
+    right: 0;
 }
 
 .winFrame#noShow {
@@ -65,6 +72,7 @@ h1 {
 }
 
 .cell {
+    box-sizing: border-box;
     border: 1px solid lightgreen;
     color: lightgreen;
     padding: 10px;
