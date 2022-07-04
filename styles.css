@@ -90,6 +90,11 @@ h1 {
     color: red;
 }
 
+.message#neutral {
+    color: goldenrod;
+    font-weight: 600;
+}
+
 .message#positive {
     color: lightgreen;
     font-weight: 600;

@@ -24,6 +24,8 @@ const gameboard = (function () {
     game = {
         marks: ['', '', '', '', '', '', '', '', ''],
 
+        player: playerA,
+
         render: function () {
 
             // clear board
@@ -46,6 +48,7 @@ const gameboard = (function () {
             game.marks = ['', '', '', '', '', '', '', '', ''];
             message.textContent = ''
             winFrame.id = 'noShow'
+            game.player = playerA;
             game.render();
         },
 
@@ -82,8 +85,11 @@ const gameboard = (function () {
                 game.marks[6] === 'X' && game.marks[7] === 'X' && game.marks[8] === 'X' ||
                 game.marks[6] === 'O' && game.marks[7] === 'O' && game.marks[8] === 'O') {
                     game.winner(6,7,8);
-            } else {
-                console.log(e.target);
+            } else if (game.marks.every(mark => mark !== '')) {
+                winFrame.id = 'show'
+                message.textContent = `It's a draw!`
+                message.id= 'neutral'
+                } else {
                 return
             }
         },
@@ -107,12 +113,18 @@ const gameboard = (function () {
         if (game.marks[e.target.id] !== '') {
             message.textContent = 'Pick again';
             message.id = 'error';
-            console.log('error');
-            console.log(e.target.id);
 
         } else {
             message.textContent = ''
-            game.marks[e.target.id] = 'X';
+            if (game.player.marker === 'X') {
+                game.marks[e.target.id] = 'X';
+                game.player = playerB;
+            } else if (game.player.marker === 'O') {
+                game.marks[e.target.id] = 'O';
+                game.player = playerA;
+            } else {
+                console.log('error')
+            }
             game.render();
             game.verify(e);
         }
