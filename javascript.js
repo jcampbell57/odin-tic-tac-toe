@@ -112,11 +112,11 @@ const gameboard = (function () {
     //listeners 
     // user input listener
     gameContainer.addEventListener('click', (e) => {       
-
-        if (game.marks[e.target.id] !== '') {
+        if (winFrame.id === 'show') {
+            return;
+        } else if (game.marks[e.target.id] !== '' && winFrame.id === 'noShow') {
             message.textContent = 'Pick again';
             message.id = 'error';
-
         } else {
             message.textContent = ''
             if (game.player.marker === 'X') {
