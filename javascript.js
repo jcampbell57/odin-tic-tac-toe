@@ -29,9 +29,10 @@ const gameboard = (function () {
         render: function () {
 
             // clear board
-            let cellCount = gameContainer.childElementCount + 1;
+            let cellCount = gameContainer.childElementCount;
             for (let i=1; i<cellCount; i++) {
-                gameContainer.children[0].remove();
+                // clidren[1] instead of children[0] so winFrame is never deleted
+                gameContainer.children[1].remove();
             }
 
             // populate board
@@ -41,12 +42,14 @@ const gameboard = (function () {
                 newCell.id = item;
                 newCell.textContent = game.marks[item];
                 gameContainer.appendChild(newCell);
-            }        
+            }   
+
+            message.textContent = `${game.player.marker}'s turn`   
+            message.id = 'neutral'          
         },
 
         reset: function () {
             game.marks = ['', '', '', '', '', '', '', '', ''];
-            message.textContent = ''
             winFrame.id = 'noShow'
             game.player = playerA;
             game.render();

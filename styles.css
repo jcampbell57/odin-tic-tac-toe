@@ -18,8 +18,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* box-sizing: border-box;
-    border: 2px solid hotpink; */
 }
 
 .header {
@@ -83,7 +81,7 @@ h1 {
 
 .message {
     height: 35px;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .message#error {
@@ -106,7 +104,8 @@ h1 {
     border: 3px solid var(--font-color-dark);
     border-radius: 12px;
     color: var(--font-color-dark);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-family: inherit;
     padding: 20px;
 }
 
