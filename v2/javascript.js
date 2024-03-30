@@ -21,17 +21,10 @@
     };
 
     const render = () => {
-      let rendering = []
-      for (let row = 0; row < 3; row++) {
-        let rowContent = '';
-        for (let col = 0; col < 3; col++) {
-          const index = row * 3 + col;
-          const squareContent = squares[index] === '' ? (index + 1).toString() : squares[index];
-          rowContent += (col > 0 ? ' | ' : '') + squareContent;
-        }
-        rendering[row] = rowContent
+      let gameBoard = document.querySelector('.gameBoard').children
+      for (let square of gameBoard) {
+        square.textContent=squares[square.id]
       }
-      return rendering
     }
 
     return { setSquare, getBoard, reset, render };
@@ -45,19 +38,11 @@
     const playerX = player('X')
     const playerO = player('O')
     let currentPlayer = playerX
+    messageContainer = document.querySelector('.messageContainer')
+    overlay = document.getElementById('overlay')
 
     const promptTurn = () => {
-      currentRendering = gameBoard.render();
-      const index = window.prompt(`
-        ${currentPlayer.marker}'s turn. 
-
-        ${currentRendering[0]}
-        ${currentRendering[1]} 
-        ${currentRendering[2]}
-
-        Enter a position (1-9):`
-      );    
-      processInput(parseInt(index) - 1);
+      messageContainer.textContent = `${currentPlayer.marker}'s turn`
     }
 
     let winner = () => {
@@ -66,13 +51,6 @@
         [0, 3, 6], [1, 4, 7], [2, 5, 8],
         [0, 4, 8], [2, 4, 6]
       ];
-
-      for (let combo of winningCombinations) {
-        combo.forEach(index => {  
-          console.log(gameBoard.getBoard()[index])
-          console.log(currentPlayer.marker)
-        });
-      }
 
       for (let combo of winningCombinations) {
         if (combo.every(index => gameBoard.getBoard()[index] === currentPlayer.marker)) {
@@ -86,14 +64,16 @@
       if (gameBoard.setSquare(index, currentPlayer.marker)) {
         const gameWinner = winner()
         if (gameWinner) {
-          window.alert(`${gameWinner.marker} wins!`)
+          gameBoard.render();
+          overlay.style.display = "block"
+          messageContainer.textContent = `${gameWinner.marker} wins!`
         } else {
           // Check for a draw or continue the game
           const isDraw = gameBoard.getBoard().every(square => square !== '');
           if (isDraw) {
-            window.alert("It's a draw!");
-            // gameBoard.reset();
-            // gameBoard.render();
+            gameBoard.render();
+            overlay.style.display = "block"
+            messageContainer.textContent = "It's a draw!"
           } else {
             // Switch player and continue the game
             currentPlayer = (currentPlayer === playerX ? playerO : playerX);
@@ -106,10 +86,35 @@
       }
     }
 
-    const init = () => {
+    const reset = () => {
+      overlay.style.display = "none"
+      gameBoard.reset();
       gameBoard.render();
+      currentPlayer = playerX;
       promptTurn();
     }
+
+    const setListeners = () => {
+      let boardSquares = document.querySelector('.gameBoard').children;
+      // for loop for html element
+      for (let boardSquare of boardSquares) {
+        boardSquare.addEventListener('click', (e) => {
+          if (e.target.id !== 'overlay') {
+            processInput(boardSquare.id);  
+          }        
+        });
+      };
+
+      let resetButton = document.getElementById('resetButton');
+      resetButton.addEventListener('click', () => reset());
+    };
+
+    const init = () => {
+      overlay.style.display = "none"
+      gameBoard.render();
+      setListeners();
+      promptTurn();
+    };
 
     return { init };
   })();
