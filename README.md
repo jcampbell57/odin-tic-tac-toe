@@ -22,3 +22,15 @@ This project could be improved with:
 
 
 ## Photos
+
+### Tic-tac-toe new game:
+![tic-tac-toe new game](assets/tic-tac-toe-new-game-600w.png)
+<br>
+
+### Tic-tac-toe mid game:
+![tic-tac-toe mid game](assets/tic-tac-toe-mid-game-600w.png)
+<br>
+
+### Tic-tac-toe end game:
+![tic-tac-toe end game](assets/tic-tac-toe-end-game-600w.png)
+<br>
